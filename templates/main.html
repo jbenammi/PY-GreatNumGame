@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Jonathan Ben-Ammi">
+	<title></title>
+	<meta name="description" content="">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+<body>
+<div class="container">
+	<h1>Welcome to the Great Number Game!</h1>
+	<h3>I am thinking of a number between 1 and 100</h3>
+	<h3>Take a guess!</h3>
+	{% if session['guess'] == "win"%}
+	<div class="green">
+	<h2>{{session['numnum']}} was the number!</h2>
+	<a href="/clear"><button class="btn">Play again!</button></a>	
+	</div>
+	{% elif session['guess'] == "high"%}
+	<div class="red">
+	<h2>Number was too High, try again.</h2>	
+	</div>
+	{% elif session['guess'] == "low"%}
+	<div class="red">
+	<h2>Number was too Low, try again.</h2>	
+	</div>
+	{% endif %}
+	<form action="/guess" method="post">
+		<input type="number" min="1" max="100" name="number" autofocus />
+		<button class="btn" type="submit">Submit</button>
+	</form>
+</div>
+</body>
+</html>
